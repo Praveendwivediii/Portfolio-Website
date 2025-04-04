@@ -411,6 +411,90 @@ nav {
     margin-top: 3rem;
 }
 
+/* Resume Section */
+.resume {
+    background-color: var(--light-color);
+    padding: 6rem 0; /* Consistent with other sections */
+}
+
+.resume-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.pdf-viewer {
+    margin-bottom: 2rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow); /* Added for consistency */
+}
+
+.html-resume {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.resume-section {
+    margin-bottom: 2rem;
+}
+
+.resume-item {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.resume-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+}
+
+.resume-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.resume-item h5 {
+    color: var(--gray-color);
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.resume-item ul {
+    padding-left: 1.5rem;
+}
+
+.resume-item li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.resume-item li::before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+}
+
+.download-btn {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+/* Contact Section (continues with existing contact styles) */
+.contact-content {
+    display: flex;
+    gap: 4rem;
+}
+
+/* [Rest of your existing CSS remains unchanged] */
 /* Contact Section */
 .contact-content {
     display: flex;
