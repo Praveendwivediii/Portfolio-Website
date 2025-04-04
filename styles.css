@@ -61,7 +61,7 @@
 /* Resume Section */
 .resume {
     background-color: var(--light-color);
-    padding: 6rem 0; /* Consistent with other sections */
+    padding: 6rem 0;
 }
 
 .resume-container {
@@ -75,11 +75,11 @@
     border: 1px solid #ddd;
     border-radius: var(--border-radius);
     overflow: hidden;
-    box-shadow: var(--box-shadow); /* Added for consistency */
+    box-shadow: var(--box-shadow);
 }
 
 .html-resume {
-    background: white;
+    background: var(--white);
     padding: 2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
@@ -115,12 +115,13 @@
 
 .resume-item ul {
     padding-left: 1.5rem;
+    list-style-type: none;
 }
 
 .resume-item li {
     margin-bottom: 0.5rem;
     position: relative;
-    padding-left: 1rem;
+    padding-left: 1.5rem;
 }
 
 .resume-item li::before {
@@ -135,10 +136,60 @@
     margin: 2rem 0;
 }
 
-/* Contact Section (continues with existing contact styles) */
+/* Contact Section */
 .contact-content {
     display: flex;
     gap: 4rem;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-form {
+    flex: 1;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.contact-item i {
+    width: 50px;
+    height: 50px;
+    background-color: var(--light-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: var(--primary-color);
+    font-size: 1.25rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-5px);
 }
 
 /* [Rest of your existing CSS remains unchanged] */
