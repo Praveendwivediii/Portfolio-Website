@@ -16,7 +16,12 @@
     --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     --box-shadow-light: 0 5px 15px rgba(0, 0, 0, 0.1);
     --border-radius: 10px;
-    --section-padding: 8rem 0;
+    --section-padding: 8rem 0--bg-color: #121212;
+    --text-color: #ffffff;
+    --primary-color: #6c63ff;
+    --secondary-color: #4d44db;
+    --card-bg: #1e1e1e;
+    --nav-bg: rgba(30, 30, 30, 0.8);
 }
 
 /* Light Theme Variables */
@@ -27,6 +32,10 @@
     --dark-gray: #e0e0e0;
     --medium-gray: #f1f1f1;
     --light-gray: #2d2d2d;
+    --bg-color: #ffffff;
+    --text-color: #121212;
+    --card-bg: #f8f9fa;
+    --nav-bg: rgba(248, 249, 250, 0.8);
 }
 
 /* Base Styles */
@@ -48,6 +57,9 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
     transition: background-color 0.5s ease, color 0.5s ease;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* [Rest of your CSS with dark theme modifications] */
@@ -101,6 +113,7 @@ h2 {
 header {
     background-color: rgba(18, 18, 18, 0.8);
     backdrop-filter: blur(10px);
+    background-color: var(--nav-bg);
 }
 
 header.sticky {
@@ -161,6 +174,7 @@ header.sticky {
     height: 300px;
     transition: var(--transition);
     background-color: var(--dark-gray);
+    background-color: var(--card-bg);
 }
 
 .work-overlay {
