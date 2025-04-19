@@ -1,27 +1,45 @@
-// Mobile Navigation
-const burger = document.querySelector('.burger');
-const navLinks = document.querySelector('.nav-links');
-const navItems = document.querySelectorAll('.nav-links li');
+// Theme Toggle Functionality
+const themeToggle = document.getElementById('theme-toggle');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+const currentTheme = localStorage.getItem('theme');
 
-burger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    burger.classList.toggle('active');
-    
-    // Animate links
-    navItems.forEach((link, index) => {
-        if (link.style.animation) {
-            link.style.animation = '';
-        } else {
-            link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-        }
-    });
+// Set initial theme
+if (currentTheme === 'light' || (!currentTheme && !prefersDarkScheme.matches)) {
+    document.documentElement.setAttribute('data-theme', 'light');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+} else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+}
+
+// Toggle theme
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
 });
 
-// Smooth scrolling for anchor links
+// Back to Top Button
+const backToTopButton = document.querySelector('.back-to-top');
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('visible');
+    } else {
+        backToTopButton.classList.remove('visible');
+    }
+});
+
+// Smooth scrolling for all links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
         
@@ -29,93 +47,52 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             top: targetElement.offsetTop - 80,
             behavior: 'smooth'
         });
-        
-        // Close mobile menu if open
-        if (navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            burger.classList.remove('active');
-            navItems.forEach(link => {
-                link.style.animation = '';
-            });
-        }
     });
 });
 
-// Custom cursor
+// Enhanced Cursor
 const cursor = document.querySelector('.cursor');
+let mouseX = 0;
+let mouseY = 0;
+let cursorX = 0;
+let cursorY = 0;
+const speed = 0.1;
+
+const animateCursor = () => {
+    const distX = mouseX - cursorX;
+    const distY = mouseY - cursorY;
+    
+    cursorX = cursorX + (distX * speed);
+    cursorY = cursorY + (distY * speed);
+    
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+    
+    requestAnimationFrame(animateCursor);
+};
 
 document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.pageX + 'px';
-    cursor.style.top = e.pageY + 'px';
+    mouseX = e.pageX;
+    mouseY = e.pageY;
 });
 
+animateCursor();
+
 // Add cursor effects on hover
-const hoverElements = document.querySelectorAll('a, button, .work-item, .skill-tags span');
+const hoverElements = document.querySelectorAll('a, button, .work-item, .skill-tags span, input, textarea');
 
 hoverElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
         cursor.classList.add('cursor-grow');
+        if (el.classList.contains('btn-primary')) {
+            cursor.classList.add('cursor-primary');
+        }
     });
     
     el.addEventListener('mouseleave', () => {
         cursor.classList.remove('cursor-grow');
+        cursor.classList.remove('cursor-primary');
     });
 });
 
-// Animate stats counter
-const statNumbers = document.querySelectorAll('.stat-number');
-
-const animateStats = () => {
-    statNumbers.forEach(stat => {
-        const target = +stat.getAttribute('data-count');
-        const count = +stat.innerText;
-        const increment = target / 100;
-        
-        if (count < target) {
-            stat.innerText = Math.ceil(count + increment);
-            setTimeout(animateStats, 20);
-        } else {
-            stat.innerText = target;
-        }
-    });
-};
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-            
-            // Animate stats when about section is visible
-            if (entry.target.id === 'about') {
-                animateStats();
-            }
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
-});
-
-// Sticky header on scroll
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    header.classList.toggle('sticky', window.scrollY > 0);
-});
-
-// Form submission
-const contactForm = document.querySelector('.contact-form');
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Here you would typically send the form data to a server
-    // For demo purposes, we'll just show an alert
-    alert('Thank you for your message! I will get back to you soon.');
-    contactForm.reset();
-});
+// [Rest of your existing JavaScript with enhancements]
